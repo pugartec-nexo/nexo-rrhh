@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo — Control Horario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header>
+      <div class="logo">
+        <div class="logo-dot"></div>
+        <div>
+          <h1>nexo <span>/ recursos humanos</span></h1>
+          <p>Control horario</p>
+        </div>
+      </div>
+      <div class="reloj">
+        <div id="hora">--:--:--</div>
+        <div id="fecha"></div>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('marcar')">Marcar asistencia</button>
+      <button class="tab" onclick="switchTab('admin')">Panel admin</button>
+    </div>
+
+    <!-- VISTA: MARCAR ASISTENCIA -->
+    <div id="vista-marcar" class="vista active">
+
+      <!-- Paso 1: seleccionar empleado -->
+      <div id="paso-seleccionar">
+        <p class="paso-label">Paso <strong>1 de 3</strong> — Selecciona tu nombre</p>
+        <div id="lista-empleados" class="grilla-empleados"></div>
+      </div>
+
+      <!-- Paso 2: ingresar PIN -->
+      <div id="paso-pin" style="display:none">
+        <button class="btn-volver" onclick="volver('seleccionar')">← volver</button>
+        <p class="paso-label">Paso <strong>2 de 3</strong> — Ingresa tu PIN</p>
+        <div id="info-empleado-pin"></div>
+        <p class="pin-label">PIN de 4 dígitos</p>
+        <div class="pin-puntos" id="pin-puntos">
+          <div class="punto"></div>
+          <div class="punto"></div>
+          <div class="punto"></div>
+          <div class="punto"></div>
+        </div>
+        <div class="teclado">
+          <button onclick="agregarPin('1')">1</button>
+          <button onclick="agregarPin('2')">2</button>
+          <button onclick="agregarPin('3')">3</button>
+          <button onclick="agregarPin('4')">4</button>
+          <button onclick="agregarPin('5')">5</button>
+          <button onclick="agregarPin('6')">6</button>
+          <button onclick="agregarPin('7')">7</button>
+          <button onclick="agregarPin('8')">8</button>
+          <button onclick="agregarPin('9')">9</button>
+          <button onclick="borrarPin()">⌫</button>
+          <button onclick="agregarPin('0')">0</button>
+          <button onclick="limpiarPin()">✕</button>
+        </div>
+        <p id="pin-error" class="error"></p>
+      </div>
+
+      <!-- Paso 3: acciones -->
+      <div id="paso-accion" style="display:none">
+        <button class="btn-volver" onclick="volver('seleccionar')">← volver</button>
+        <p class="paso-label">Paso <strong>3 de 3</strong> — Registra tu marcación</p>
+        <div id="info-empleado-accion"></div>
+        <div id="mensaje-exito" style="display:none"></div>
+        <div id="estado-hoy"></div>
+        <div id="botones-accion" class="grilla-acciones"></div>
+      </div>
+
+    </div>
+
+    <!-- VISTA: ADMIN -->
+    <div id="vista-admin" class="vista" style="display:none">
+      <div id="admin-login">
+        <p class="section-title">Acceso administrador</p>
+        <input type="password" id="admin-pass" placeholder="Contraseña" onkeydown="if(event.key==='Enter') verificarAdmin()">
+        <button onclick="verificarAdmin()">Ingresar</button>
+        <p id="admin-error" class="error"></p>
+      </div>
+      <div id="admin-panel" style="display:none">
+        <div id="metricas" class="grilla-metricas"></div>
+        <p class="section-title">Registros del período</p>
+        <div class="filtros">
+          <select id="filtro-empleado" onchange="cargarTabla()">
+            <option value="">Todos los empleados</option>
+          </select>
+          <input type="month" id="filtro-mes" onchange="cargarTabla()">
+        </div>
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Empleado</th><th>Fecha</th><th>Entrada</th>
+                <th>Sal. almuerzo</th><th>Ret. almuerzo</th>
+                <th>Salida</th><th>Total hrs</th><th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-body"></tbody>
+          </table>
+        </div>
+        <div id="resumen-mensual"></div>
+      </div>
+    </div>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

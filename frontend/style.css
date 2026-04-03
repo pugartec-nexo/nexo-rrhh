@@ -1,0 +1,170 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #f5f5f3;
+  color: #1a1a1a;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-dot { width: 10px; height: 10px; border-radius: 50%; background: #534AB7; }
+.logo h1 { font-size: 18px; font-weight: 500; }
+.logo h1 span { color: #888; font-weight: 400; }
+.logo p { font-size: 12px; color: #888; }
+
+.reloj { text-align: right; }
+#hora { font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+#fecha { font-size: 12px; color: #888; }
+
+/* TABS */
+.tabs { display: flex; gap: 4px; background: #ebebeb; border-radius: 8px; padding: 4px; margin-bottom: 1.5rem; }
+.tab { flex: 1; padding: 8px; border: none; background: transparent; border-radius: 6px; font-size: 13px; font-weight: 500; color: #666; cursor: pointer; }
+.tab.active { background: white; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+/* PASOS */
+.paso-label { font-size: 13px; color: #888; margin-bottom: 1.25rem; }
+.paso-label strong { color: #1a1a1a; }
+
+/* EMPLEADOS */
+.grilla-empleados { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+
+.emp-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  background: white;
+  transition: all 0.15s;
+}
+.emp-card:hover { border-color: #534AB7; background: #fafafa; }
+
+.emp-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 500; margin-bottom: 10px;
+}
+.emp-nombre { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+.emp-rol { font-size: 12px; color: #888; margin-bottom: 8px; }
+
+.badge {
+  display: inline-block; padding: 2px 8px;
+  border-radius: 20px; font-size: 11px; font-weight: 500;
+}
+.badge-none { background: #f0f0f0; color: #666; }
+.badge-trabajando { background: #EEEDFE; color: #3C3489; }
+.badge-almuerzo { background: #FAECE7; color: #712B13; }
+.badge-salida { background: #EAF3DE; color: #27500A; }
+
+/* PIN */
+.pin-label { font-size: 13px; color: #888; margin-bottom: 10px; }
+.pin-puntos { display: flex; gap: 10px; margin-bottom: 1rem; }
+.punto {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 1px solid #ccc; transition: background 0.1s;
+}
+.punto.lleno { background: #534AB7; border-color: #534AB7; }
+
+.teclado { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 200px; }
+.teclado button {
+  border: 1px solid #e0e0e0; background: white;
+  border-radius: 8px; padding: 14px;
+  font-size: 16px; font-weight: 500; cursor: pointer;
+  transition: all 0.1s; color: #1a1a1a;
+}
+.teclado button:hover { background: #f5f5f5; }
+.teclado button:active { transform: scale(0.96); }
+
+/* ACCIONES */
+.grilla-acciones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 480px; }
+.accion-btn {
+  border: 1px solid #e0e0e0; background: white;
+  border-radius: 12px; padding: 1.25rem 1rem;
+  cursor: pointer; text-align: left; transition: all 0.15s;
+}
+.accion-btn:hover:not(:disabled) { border-color: #ccc; background: #fafafa; }
+.accion-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.accion-icono { font-size: 20px; margin-bottom: 8px; }
+.accion-titulo { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+.accion-sub { font-size: 12px; color: #888; margin-top: 2px; }
+
+/* ESTADO HOY */
+.estado-hoy {
+  background: #f5f5f3; border-radius: 12px;
+  padding: 1rem 1.25rem; margin-bottom: 1.25rem; max-width: 480px;
+}
+.estado-fila {
+  display: flex; justify-content: space-between;
+  padding: 6px 0; border-bottom: 1px solid #e8e8e8;
+  font-size: 13px;
+}
+.estado-fila:last-child { border-bottom: none; }
+.estado-label { color: #888; }
+.estado-val { font-weight: 500; font-variant-numeric: tabular-nums; }
+.estado-total { color: #534AB7; font-size: 15px; }
+
+/* EXITO */
+.exito {
+  background: #EAF3DE; border: 1px solid #C0DD97;
+  border-radius: 12px; padding: 1rem 1.25rem;
+  margin-bottom: 1rem; max-width: 480px;
+}
+.exito p { font-size: 14px; color: #27500A; font-weight: 500; }
+.exito span { font-size: 13px; color: #3B6D11; }
+
+/* ADMIN */
+#admin-login { max-width: 280px; }
+#admin-login input {
+  width: 100%; padding: 9px 12px; margin-bottom: 10px;
+  border: 1px solid #e0e0e0; border-radius: 8px;
+  font-size: 14px; background: white;
+}
+#admin-login button {
+  width: 100%; padding: 9px; font-size: 14px; font-weight: 500;
+  border: 1px solid #e0e0e0; border-radius: 8px;
+  background: white; cursor: pointer;
+}
+#admin-login button:hover { background: #f5f5f5; }
+
+.section-title { font-size: 15px; font-weight: 500; margin-bottom: 1rem; }
+
+.grilla-metricas { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+.metrica { background: #f5f5f3; border-radius: 8px; padding: 1rem; }
+.metrica-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+.metrica-valor { font-size: 22px; font-weight: 500; }
+
+.filtros { display: flex; gap: 10px; margin-bottom: 1rem; flex-wrap: wrap; }
+.filtros select, .filtros input {
+  padding: 7px 10px; font-size: 13px;
+  border: 1px solid #e0e0e0; border-radius: 8px; background: white;
+}
+
+.tabla-wrap { overflow-x: auto; border: 1px solid #e0e0e0; border-radius: 12px; margin-bottom: 1.5rem; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; padding: 8px 10px; color: #888; font-weight: 500; border-bottom: 1px solid #e0e0e0; }
+td { padding: 9px 10px; border-bottom: 1px solid #e0e0e0; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #fafafa; }
+
+/* HELPERS */
+.btn-volver { border: none; background: none; font-size: 13px; color: #888; cursor: pointer; padding: 0; margin-bottom: 1.25rem; }
+.btn-volver:hover { color: #1a1a1a; }
+.error { font-size: 12px; color: #A32D2D; margin-top: 8px; min-height: 16px; }
+.info-emp { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+.info-emp .emp-avatar { width: 36px; height: 36px; font-size: 13px; margin-bottom: 0; }

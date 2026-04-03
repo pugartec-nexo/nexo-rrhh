@@ -51,7 +51,7 @@ app.get('/registros/hoy/:empleadoId', async (req, res) => {
 app.post('/registros/marcar', async (req, res) => {
   const { empleado_id, tipo } = req.body
   const hoy = new Date().toISOString().slice(0, 10)
-  const ahora = new Date().toISOString()
+  const ahora = new Date().toLocaleString('sv-SE', { timeZone: 'America/Santiago' }).replace(' ', 'T')
 
   // Buscar si ya existe un registro hoy
   let { data: registro } = await supabase
@@ -102,7 +102,8 @@ app.post('/registros/marcar', async (req, res) => {
 app.get('/registros/mes', async (req, res) => {
   const { mes, empleado_id } = req.query
   const inicio = `${mes}-01`
-  const fin = `${mes}-31`
+  const [anio, mes2] = mes.split('-')
+const fin = new Date(anio, mes2, 0).toISOString().slice(0, 10)
 
   let query = supabase
     .from('registros')
